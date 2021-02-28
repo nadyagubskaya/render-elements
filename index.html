@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <body>
+
+        <script>
+
+            const list = [1,2,3,[4,5,6,[7,8,9]]]
+
+            function createList(list) {
+                const $ul = document.createElement('ul');
+
+                list.forEach(function(el) {
+                    const $li = document.createElement('li');
+
+                    if (Array.isArray(el)) {
+                        $li.append(createList(el));
+                    } else {
+                        $li.textContent = el;
+                    }
+                    $ul.append($li);
+                });
+
+                return $ul;
+            }
+            const $list = createList(list);
+            document.body.prepend($list);
+
+
+
+            //Вывести таблицу 10 × 10, заполненную числами от 1 до 100
+
+            const size = 10;
+
+            const $table = document.createElement('table'); 
+    
+            for (let i = 0; i < size; i++) {
+
+                const $tr = document.createElement('tr');
+                $table.append($tr)
+
+                for (k = 1; k <= size; k++) {
+                    const $td = document.createElement('td');
+                    
+                    $td.textContent = i * 10 + k;
+                    
+                    $tr.append($td);
+                    $td.style.cssText=`border: 1px solid black; text-align: center;`;
+                }
+            }
+
+            document.body.prepend($table);
+
+        </script>
+
+    </body>
+</html>
